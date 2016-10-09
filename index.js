@@ -45,7 +45,10 @@ let pathFind = function * pathFind(next) {
     }
 
     const results = algorithm.getResults()
-    this.body = yield { path: results }
+    const orderedPoints = body.points.map(function(obj, index, array) {
+      return array[results[index]]
+    })
+    this.body = yield { path: results, orderedPoints: orderedPoints }
   } else {
     this.throw('Invalid points format', 400)
   }
